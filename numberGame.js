@@ -13,12 +13,13 @@ class Board {
         for(let i=0; i<this.boardSize*this.boardSize; i++) {
             arrayOfNumbers.push(i);
         }
-        console.log(arrayOfNumbers);
+        // console.log(arrayOfNumbers);
         return arrayOfNumbers 
     }
 
     getRandomNumber(numberList) {
-        console.log(numberList);
+        console.log(`length of list is: ${numberList.length}`);
+        console.log(`list is: ${numberList}`)
         if (numberList.length >= 1) {
             let result = Math.floor((Math.random() * (numberList.length-1)));
             console.log(`Random Number Value: ${numberList[result]}`)
@@ -46,7 +47,8 @@ class Board {
             for (let column=0; column < this.boardSize; column++) {
                 const number = this.getRandomNumber(numberList);
                 this.removeNumberFromArray(number, numberList);
-                // this.cellArray[row][column]=new cell(this.board,row,column,number);
+                const boardObj = new Board(this.boardSize, this.containerDiv);
+                this.cellArray[row][column]=new Cell(boardObj, row, column, number);
                 const divTableCell = document.createElement("div");
                 divTableCell.id = `div_${row}${column}`;
                 divTableCell.innerHTML = `${row}${column}`;
@@ -59,4 +61,14 @@ class Board {
     }
 
     
+}
+
+class Cell {
+    constructor(board, row, column, number) {
+        this.board = board,
+        this.row = row,
+        this.column = column, 
+        this.number = number
+        console.log(this.board, this.row, this.column, this.number);
+    }
 }
