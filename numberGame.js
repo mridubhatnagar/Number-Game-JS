@@ -153,10 +153,10 @@ class Cell {
         const divTableCell = document.createElement("div");
         divTableCell.id = `div_${this.row}${this.column}`;
         if (result == 0) {
-            divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell onclick=board["cellArray"][${this.row}][${this.column}].move()>${result}</button>`;
+            divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell onclick=board.cellArray[${this.row}][${this.column}].move()>${result} </button>`;
         }
         else {
-            divTableCell.innerHTML = `<button type="button" id=button_${this.row}${this.column} class="numbercell" onclick=board["cellArray"][${this.row}][${this.column}].move()>${result}</button>`;
+            divTableCell.innerHTML = `<button type="button" id=button_${this.row}${this.column} class="numbercell" onclick=board.cellArray[${this.row}][${this.column}].move()>${result}</button>`;
         }
         divTableCell.setAttribute("class", `divTableCell`);
         return divTableCell
