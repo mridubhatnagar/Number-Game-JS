@@ -1,17 +1,68 @@
 /* DivTable.com */
 .divTable{
 	display: table;
-	width: 50%;
+	margin: auto;
+	width: fit-content;
+	border: 5px solid yellow;
+	
 }
 .divTableRow {
 	display: table-row;
-    background-color: aqua;
 }
 .divTableCell  {
-	border: 1px solid #999999;
 	display: table-cell;
-	padding: 3px 10px;
+	margin: 0px;
+	padding: 0px;
+	width: 10px;
+	height: 100px;
 }
 .divTableBody {
 	display: table-row-group;
+}
+
+.numbercell {
+	margin: 0px;
+	padding: 0px;
+	height: 100px;
+	width: 100px;
+	font-size: medium;
+}
+
+#gameheading{
+	text-align: center;
+}
+
+.gameoptions {
+	text-align: center;
+	font-size: 1.875em;
+}
+
+#boardsize {
+	width: 5em;
+	height: 1.875em;
+}
+
+.playbutton {
+	width: 100px;
+	height: 1.875em;
+}
+
+#gameboard {
+	display: block;
+	margin: auto;
+	width: 50%;
+	margin-top: 50px;
+}
+
+.divBody {
+	margin: auto;
+	width: fit-content;
+	border: 5px solid green;
+		
+}
+
+.divTableRow{
+	display: block;
+	margin: auto;
+	width: 100%;
 }

@@ -51,14 +51,19 @@ class Board {
                 const result = this.cellArray[row][column].getNumber()
                 const divTableCell = document.createElement("div");
                 divTableCell.id = `div_${row}${column}`;
-                this.cellArray[row][column].move();
-                divTableCell.innerHTML = `<button type="button" onclick="this.cellArray[${row}][${column}]".move()>${result}</button>`;
+                if (result == 0) {
+                    divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell">${result}</button>`;
+                }
+                else {
+                    divTableCell.innerHTML = `<button type="button" id=button_${row}${column} class="numbercell">${result}</button>`;
+                }
                 divTableCell.setAttribute("class", `divTableCell`);
                 divTableRow.appendChild(divTableCell);
             }
         }
                 
         document.getElementById(this.containerDiv).appendChild(divTable);
+        document.getElementById("hole").style.background = "black";
     }
 
     
@@ -74,16 +79,16 @@ class Cell {
     }
 
     getNumber() {
-        return this.board['cellArray'][this.row][this.column]
+        return this.number
     }
 
     setNumber(n) {
-        this.board['cellArray'][this.row][this.column] = n;
-        console.log(this.board['cellArray'][this.row][this.column]);
+        this.number = n;
+        console.log(`setNumber: ${this.number}`);
     }
 
-    isBlank(n) {
-        if (n == 0) {
+    isBlank() {
+        if (this.number == 0) {
             return true
         }
         else {
@@ -132,7 +137,7 @@ class Cell {
         var n = this.leftCell();
         console.log(typeof n);
         if (n) {
-            if (this.isBlank(n)) {
+            if (n.isBlank()) {
                 this.moveTo(n);
                 return true
             } 

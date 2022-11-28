@@ -6,19 +6,20 @@
     <link rel="stylesheet" type="text/css" href="numberGame.css">
     <script type="text/javascript" src="numberGame.js"></script>
 <body onload=onload()>
-    <div>
+    <div id="gameheading">
         <h1>Number Game</h1>
     </div>
     <div>
-        <form>
-            Select Board Size from the options:
+        <form class="gameoptions">
+            <label>Board Size from the options:</label> 
             <select id="boardsize">
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
               </select>
-            <button type="button" onclick="playgame()">PLAY</button>
+            <button type="button" onclick="playgame()" class="playbutton">PLAY</button>
+            <button type="button" onclick="resetgame()" class="playbutton">RESET</button>
         </form>
     </div>
     <div id="gameboard">
@@ -38,6 +39,9 @@
             const containerDiv = document.getElementById("gameboard").id;
             const board = new Board(value, containerDiv);
             board.render();
+        }
+        function resetgame() {
+            
         }
     </script>
 </body>
