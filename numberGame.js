@@ -47,17 +47,8 @@ class Board {
                 const number = this.getRandomNumber(numberList);
                 this.cellArray[row][column]=new Cell(boardObj, row, column, number);
                 console.log(this.cellArray[row][column]);
-                this.cellArray[row][column].setNumber(number)
-                const result = this.cellArray[row][column].getNumber()
-                const divTableCell = document.createElement("div");
-                divTableCell.id = `div_${row}${column}`;
-                if (result == 0) {
-                    divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell">${result}</button>`;
-                }
-                else {
-                    divTableCell.innerHTML = `<button type="button" id=button_${row}${column} class="numbercell">${result}</button>`;
-                }
-                divTableCell.setAttribute("class", `divTableCell`);
+                this.cellArray[row][column].setNumber(number);
+                const divTableCell = this.cellArray[row][column].render();
                 divTableRow.appendChild(divTableCell);
             }
         }
@@ -155,6 +146,20 @@ class Cell {
         const temp = n;
         n = this.number;
         this.number = temp;
+    }
+
+    render() {
+        const result = this.getNumber()
+        const divTableCell = document.createElement("div");
+        divTableCell.id = `div_${this.row}${this.column}`;
+        if (result == 0) {
+            divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell onclick=board["cellArray"][${this.row}][${this.column}].move()>${result}</button>`;
+        }
+        else {
+            divTableCell.innerHTML = `<button type="button" id=button_${this.row}${this.column} class="numbercell" onclick=board["cellArray"][${this.row}][${this.column}].move()>${result}</button>`;
+        }
+        divTableCell.setAttribute("class", `divTableCell`);
+        return divTableCell
     }
 
 }    

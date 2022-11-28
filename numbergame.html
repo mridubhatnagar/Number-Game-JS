@@ -19,13 +19,13 @@
                 <option value="6">6</option>
               </select>
             <button type="button" onclick="playgame()" class="playbutton">PLAY</button>
-            <button type="button" onclick="resetgame()" class="playbutton">RESET</button>
         </form>
     </div>
     <div id="gameboard">
 
     </div>
     <script>
+    
         function onload() {
             const containerDiv = document.getElementById("gameboard").id;
             const board = new Board(3, containerDiv);
