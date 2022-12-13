@@ -180,7 +180,8 @@ class Cell {
         console.log(this.column);
         const divTableCell = document.getElementById(`div_${this.row}${this.column}`)
         if (result == 0) {
-            divTableCell.innerHTML = `<div>&nbsp;<div>`
+            divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell" style="background:black" onclick="javascript:board.cellArray[${this.row}][${this.column}].move()">&nbsp;</button>`;
+            document.getElementById("hole").style.background = "black";
         }
         else {
             divTableCell.innerHTML = `<button type="button" id=button_${this.row}${this.column} class="numbercell" onclick="javascript:board.cellArray[${this.row}][${this.column}].move()">${result}</button>`;
