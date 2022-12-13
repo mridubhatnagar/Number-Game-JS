@@ -177,11 +177,11 @@ class Cell {
         console.log(this.board.cellArray[`${this.row}`][`${this.column}`]);
         console.log(Object.getPrototypeOf(this.board.cellArray[`${this.row}`][`${this.column}`]));
         if (result == 0) {
-            divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell" onclick="this.board.cellArray[${this.row}][${this.column}]">${result} </button>`;
+            divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell" onclick="javascript:board.cellArray[${this.row}][${this.column}].move()">${result} </button>`;
             document.getElementById("hole").style.background = "black";
         }
         else {
-            divTableCell.innerHTML = `<button type="button" id=button_${this.row}${this.column} class="numbercell" onclick="this.board.cellArray[${this.row}][${this.column}]">${result}</button>`;
+            divTableCell.innerHTML = `<button type="button" id=button_${this.row}${this.column} class="numbercell" onclick="javascript:board.cellArray[${this.row}][${this.column}].move()">${result}</button>`;
         }
         divTableCell.setAttribute("class", `divTableCell`);
     }
