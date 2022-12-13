@@ -4,7 +4,9 @@
         Number Game
     </title>
     <link rel="stylesheet" type="text/css" href="numberGame.css">
-    <script>var board;</script>
+    <!-- <script>
+    var board;
+    </script> -->
     <script type="text/javascript" src="numberGame.js"></script>
 <body onload=onload()>
     <div id="gameheading">
@@ -26,9 +28,10 @@
 
     </div>
     <script>
+        var board;
         function onload() {
             const containerDiv = document.getElementById("gameboard").id;
-            const board = new Board(3, containerDiv);
+            board = new Board(3, containerDiv);
             board.render();
 
         }
