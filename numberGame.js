@@ -37,7 +37,9 @@ class Board {
         const divTableBody = document.createElement("div");
         divTableBody.setAttribute("class", "divBody");
         divTable.appendChild(divTableBody);
-        const boardObj = new Board(this.boardSize, this.containerDiv);
+        console.log("0000000");
+        console.log(divTable);
+        document.getElementById(this.containerDiv).appendChild(divTable);
         const numberList = this.generateListOfNumbers();
         for (let row = 0; row < this.boardSize; row++) {
             const divTableRow = document.createElement("div");
@@ -45,16 +47,18 @@ class Board {
             divTableBody.appendChild(divTableRow);
             for (let column=0; column < this.boardSize; column++) {
                 const number = this.getRandomNumber(numberList);
-                this.cellArray[row][column]=new Cell(boardObj, row, column, number);
+                this.cellArray[row][column]=new Cell(this, row, column, number);
                 console.log(this.cellArray[row][column]);
                 this.cellArray[row][column].setNumber(number);
-                const divTableCell = this.cellArray[row][column].render();
+                const divTableCell = document.createElement("div");
+                divTableCell.id = `div_${row}${column}`;
+                console.log("***********");
+                console.log(divTableCell);
                 divTableRow.appendChild(divTableCell);
+                this.cellArray[row][column].render();
             }
         }
-                
-        document.getElementById(this.containerDiv).appendChild(divTable);
-        document.getElementById("hole").style.background = "black";
+        
     }
 
     
@@ -135,31 +139,51 @@ class Cell {
         }
         n = this.rightCell() 
         if (n) {
-            if (this.isBlank()) {
+            if (n.isBlank()) {
                     this.moveTo(n);
                     return true
                 }
             }
+        n = this.topCell();
+        if (n) {
+            if (n.isBlank()) {
+                this.moveTo(n);
+                return true
+            }
+        }
+        n = this.bottomCell();
+        if (n) {
+            if (n.isBlank()){
+                this.moveTo(n);
+                return true 
+            }
+        }     
     }
 
     moveTo(n) {
         const temp = n;
         n = this.number;
         this.number = temp;
+        return n 
     }
 
     render() {
         const result = this.getNumber()
-        const divTableCell = document.createElement("div");
-        divTableCell.id = `div_${this.row}${this.column}`;
+        console.log(this.row);
+        console.log(this.column);
+        const divTableCell = document.getElementById(`div_${this.row}${this.column}`)
+        console.log("=============")
+        // console.log(divTableCell);
+        console.log(this.board.cellArray[`${this.row}`][`${this.column}`]);
+        console.log(Object.getPrototypeOf(this.board.cellArray[`${this.row}`][`${this.column}`]));
         if (result == 0) {
-            divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell onclick=board.cellArray[${this.row}][${this.column}].move()>${result} </button>`;
+            divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell" onclick="this.board.cellArray[${this.row}][${this.column}]">${result} </button>`;
+            document.getElementById("hole").style.background = "black";
         }
         else {
-            divTableCell.innerHTML = `<button type="button" id=button_${this.row}${this.column} class="numbercell" onclick=board.cellArray[${this.row}][${this.column}].move()>${result}</button>`;
+            divTableCell.innerHTML = `<button type="button" id=button_${this.row}${this.column} class="numbercell" onclick="this.board.cellArray[${this.row}][${this.column}]">${result}</button>`;
         }
         divTableCell.setAttribute("class", `divTableCell`);
-        return divTableCell
     }
 
 }    
