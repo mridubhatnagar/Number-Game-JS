@@ -13,20 +13,14 @@ class Board {
         for(let i=0; i<this.boardSize*this.boardSize; i++) {
             arrayOfNumbers.push(i);
         }
-        // console.log(arrayOfNumbers);
         return arrayOfNumbers 
     }
 
     getRandomNumber(numberList) {
-        console.log(`length of list is: ${numberList.length}`);
-        console.log(`list is: ${numberList}`)
         if (numberList.length >= 1) {
             let result = Math.floor((Math.random() * 100)% numberList.length);
-            console.log(`element position ${result}`);
             let retValue = numberList[result]
-            console.log(`Random Number Value: ${retValue}`)
             let x = numberList.splice(result, 1);
-            console.log(`Number popped out from list: ${x}`);
             return retValue
         }
     }
@@ -37,8 +31,6 @@ class Board {
         const divTableBody = document.createElement("div");
         divTableBody.setAttribute("class", "divBody");
         divTable.appendChild(divTableBody);
-        console.log("0000000");
-        console.log(divTable);
         document.getElementById(this.containerDiv).appendChild(divTable);
         const numberList = this.generateListOfNumbers();
         for (let row = 0; row < this.boardSize; row++) {
@@ -52,8 +44,6 @@ class Board {
                 this.cellArray[row][column].setNumber(number);
                 const divTableCell = document.createElement("div");
                 divTableCell.id = `div_${row}${column}`;
-                console.log("***********");
-                console.log(divTableCell);
                 divTableRow.appendChild(divTableCell);
                 this.cellArray[row][column].render();
             }
@@ -79,7 +69,6 @@ class Cell {
 
     setNumber(n) {
         this.number = n;
-        console.log(`setNumber: ${this.number}`);
     }
 
     isBlank() {
@@ -190,29 +179,24 @@ class Cell {
     }
 
     validate() {
-        console.log("inside validate");
         let count = 1;
         for (let i=0; i<=board.boardSize-1; i++) {
-            console.log("outer loop");
             for (let j=0; j<=board.boardSize-1; j++) {
-                console.log("inner loop");
                 if (board.cellArray[i][j].number == count) {
-                    console.log("inside if")
                     count += 1;
                 }
+                else if (i==board.boardSize-1 && j==board.boardSize-1) {
+                    return true 
+                }
                 else {
-                    console.log("loop break")
                     return false
                 }
             } 
         }
-        return true
     }
 
     render() {
         const result = this.getNumber()
-        console.log(this.row);
-        console.log(this.column);
         const divTableCell = document.getElementById(`div_${this.row}${this.column}`)
         if (result == 0) {
             divTableCell.innerHTML = `<button type="button" id="hole" class="numbercell" style="background:black" onclick="javascript:board.cellArray[${this.row}][${this.column}].move()">&nbsp;</button>`;
