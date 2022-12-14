@@ -4,9 +4,6 @@
         Number Game
     </title>
     <link rel="stylesheet" type="text/css" href="numberGame.css">
-    <!-- <script>
-    var board;
-    </script> -->
     <script type="text/javascript" src="numberGame.js"></script>
 <body onload=onload()>
     <div id="gameheading">
@@ -23,6 +20,9 @@
               </select>
             <button type="button" onclick="playgame()" class="playbutton">PLAY</button>
         </form>
+        <div id="gamestatus">
+            <h2 id="winningmessage"></h2>
+        </div>
     </div>
     <div id="gameboard">
 
@@ -30,6 +30,7 @@
     <script>
         var board;
         function onload() {
+            document.getElementById("winningmessage").innerHTML = "";
             const containerDiv = document.getElementById("gameboard").id;
             board = new Board(3, containerDiv);
             board.render();
@@ -37,6 +38,7 @@
         }
 
         function playgame() {
+            document.getElementById("winningmessage").innerHTML = "";
             document.getElementById("gameboard").innerHTML = "";
             const value = document.getElementById("boardsize").value;
             const containerDiv = document.getElementById("gameboard").id;

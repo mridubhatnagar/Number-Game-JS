@@ -101,7 +101,7 @@ class Cell {
     }
     
     rightCell() {
-        if (this.column == this.boardSize-1) {
+        if (this.column == this.board.boardSize-1) {
             return null 
         }
         else {
@@ -119,7 +119,7 @@ class Cell {
     }
 
     bottomCell() {
-        if (this.row == this.boardSize-1) {
+        if (this.row == this.board.boardSize-1) {
             return null
         }
         else {
@@ -128,7 +128,6 @@ class Cell {
     }
     
     move() {
-        console.log("inside move method")
         var n = this.leftCell();
         console.log(typeof n);
         if (n) {
@@ -136,6 +135,10 @@ class Cell {
                 this.moveTo(n);
                 this.render();
                 n.render();
+                let result = this.validate();
+                if (result) {
+                    document.getElementById("winningmessage").innerHTML = "Congratulations, You WON!!";
+                }
                 return true
             } 
         }
@@ -145,6 +148,10 @@ class Cell {
                     this.moveTo(n);
                     this.render();
                     n.render();
+                    let result = this.validate();
+                    if(result) {
+                        document.getElementById("winningmessage").innerHTML = "Congratulations, You WON!!";
+                    }
                     return true
                 }
             }
@@ -154,6 +161,10 @@ class Cell {
                 this.moveTo(n);
                 this.render();
                 n.render();
+                let result = this.validate();
+                if(result) {
+                    document.getElementById("winningmessage").innerHTML = "Congratulations, You WON!!";
+                }
                 return true
             }
         }
@@ -163,6 +174,10 @@ class Cell {
                 this.moveTo(n);
                 this.render();
                 n.render();
+                let result = this.validate()
+                if(result) {
+                    document.getElementById("winningmessage").innerHTML = "Congratulations, You WON!!";
+                }
                 return true 
             }
         }     
@@ -172,6 +187,26 @@ class Cell {
         let temp = n.number;
         n.number = this.number;
         this.number = temp;
+    }
+
+    validate() {
+        console.log("inside validate");
+        let count = 1;
+        for (let i=0; i<=board.boardSize-1; i++) {
+            console.log("outer loop");
+            for (let j=0; j<=board.boardSize-1; j++) {
+                console.log("inner loop");
+                if (board.cellArray[i][j].number == count) {
+                    console.log("inside if")
+                    count += 1;
+                }
+                else {
+                    console.log("loop break")
+                    return false
+                }
+            } 
+        }
+        return true
     }
 
     render() {
